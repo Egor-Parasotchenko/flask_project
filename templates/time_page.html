@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time Clock</title>
+    <style>
+        #clock {
+            font-size: 48px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Clock</h1>
+    <div id="clock"></div>
+
+    <script>
+        // Получаем элемент для отображения времени
+        const clock = document.getElementById("clock");
+
+        // Функция для обновления времени каждую секунду
+        function updateTime() {
+            const date = new Date();
+
+            // Получаем день недели, месяц и год
+            const dayOfWeek = date.toLocaleDateString("en-US", {weekday: "long"});
+            const month = date.toLocaleDateString("en-US", {month: "long"});
+            const year = date.getFullYear();
+
+            // Получаем часы, минуты и секунды
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            const seconds = date.getSeconds();
+
+            // Обновляем текст элемента для отображения времени
+            clock.textContent = `${dayOfWeek}, ${month} ${date.getDate()}, ${year} ${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+            // Изменяем цвет и размер текста каждую секунду
+            clock.style.color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            clock.style.fontSize = `${Math.floor(Math.random() * 50) + 10}px`;
+        }
+
+        updateTime(); // Обновляем время в первый раз
+        setInterval(updateTime, 1000); // Обновляем время каждую секунду
+    </script>
+</body>
+</html>
